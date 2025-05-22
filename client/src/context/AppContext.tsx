@@ -3,14 +3,16 @@ import React, { useCallback, useContext, useState } from "react";
 
 type IContext = {
   products: object[];
-  getProducts: (url: string) => Promise<void>;
+  getProducts: () => Promise<void>;
   productReviews: object[];
   getProductReviews: (url: string) => Promise<void>;
   changeState: () => boolean;
   productOrReview: boolean;
   addProductReview: (
     id: string,
-    data: { name: string; category: string; price: number; description: string }
+    data: { comment: string;
+    author: string;
+    rating: number; }
   ) => Promise<void>;
   productId: string;
   assignProductId: (id: string) => void;
@@ -80,7 +82,9 @@ export default function AppContext({
 
   const addProductReview = useCallback(async (
     id: string,
-    data: { name: string; category: string; price: number; description: string }
+    data: { comment: string;
+    author: string;
+    rating: number; }
   ) => {
     try {
       // console.log("data:", data);

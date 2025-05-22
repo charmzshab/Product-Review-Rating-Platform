@@ -1,17 +1,14 @@
 import { Field, Form, Formik } from "formik";
 import { Button } from "react-bootstrap";
-import { useNavigate } from "react-router";
 import { useAppContext } from "../context/AppContext";
 
 export default function AddReview(props) {
   const { productId, addProductReview } = useAppContext();
-  const navigate = useNavigate();
 
   async function handleSubmit(values: {
-    name: string;
-    category: string;
-    price: number;
-    description: string;
+    comment: string;
+    author: string;
+    rating: number;
   }) {
     try {
       const res = await addProductReview(productId, values);
@@ -25,7 +22,7 @@ export default function AddReview(props) {
 
   return (
     <Formik
-      initialValues={{ comment: "", author: "", rating: "1" }}
+      initialValues={{ comment: "", author: "", rating: 1 }}
       onSubmit={(values) => handleSubmit(values)}
     >
       <Form>

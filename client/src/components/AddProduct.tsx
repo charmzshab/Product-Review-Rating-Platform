@@ -8,7 +8,7 @@ export default function AddProduct(props) {
   async function handleSubmit(values: {
     name: string;
     description: string;
-    price: string;
+    price: number;
     category: string;
   }) {
     await addProduct(values);
@@ -16,7 +16,7 @@ export default function AddProduct(props) {
   }
   return (
     <Formik
-      initialValues={{ name: "", description: "", price: "", category: "" }}
+      initialValues={{ name: "", description: "", price: 0, category: "" }}
       onSubmit={(values) => handleSubmit(values)}
     >
       <Form>
