@@ -41,9 +41,10 @@ export default function AppContext({
   const [productOrReview, setProductOrReview] = useState(true);
   const [productId, setProductId] = useState("");
 
+  const backendurl = "https://product-review-rating-platform-server-tst0.onrender.com/api/products"
   const getProducts = useCallback(async () => {
     try {
-      const response = await axios.get("http://localhost:4000/api/products");
+      const response = await axios.get(backendurl);
       const data = response.data;
       if (Array.isArray(data)) {
         setProducts(data);
@@ -55,8 +56,7 @@ export default function AppContext({
 
   const searchProducts = useCallback(async (query:string) => {
     try {
-      console.log(`http://localhost:4000/api/products/search?q=${query}`)
-      const response = await axios.get(`http://localhost:4000/api/products/search?q=${query}`);
+      const response = await axios.get(`${backendurl}/search?q=${query}`);
       const data = response.data;
       console.log(data);
       
@@ -70,7 +70,7 @@ export default function AppContext({
 
   const getProductReviews = useCallback(async (id: string) => {
     try {
-      const response = await axios.get(`http://localhost:4000/api/products/${id}/reviews`);
+      const response = await axios.get(`${backendurl}/${id}/reviews`);
       // console.log(response.data);
       setProductReviews(response.data);
     } catch (error) {
@@ -85,7 +85,7 @@ export default function AppContext({
     try {
       // console.log("data:", data);
       await axios.post(
-        `http://localhost:4000/api/products/${id}/reviews`,
+        `${backendurl}/${id}/reviews`,
         data
       );
     } catch (error) {
@@ -110,7 +110,7 @@ export default function AppContext({
     description: string;
   })=> {
     try {
-      await axios.post(`http://localhost:4000/api/products`, product);
+      await axios.post(`${backendurl}`, product);
     } catch (error) {
       console.log("Error adding product: ", error);
     }
@@ -119,7 +119,7 @@ export default function AppContext({
 
   const deleteProductReview = useCallback(async(productId: string, reviewId: string)=> {
     try {
-      const url = `http://localhost:4000/api/products/${reviewId}/reviews/${productId}`;
+      const url = `${backendurl}/${reviewId}/reviews/${productId}`;
       await axios.delete(url);
     } catch (error) {
       console.log(error);
@@ -129,7 +129,7 @@ export default function AppContext({
   const updateReview = useCallback(async(reviewId: string, data, id: string)=> {
     try {
       const response = await axios.put(
-        `http://localhost:4000/api/products/${id}/reviews/${reviewId}`,
+        `${backendurl}/${id}/reviews/${reviewId}`,
         data
       );
       console.log(response);
