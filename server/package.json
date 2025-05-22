@@ -11,11 +11,16 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/cors": "^2.8.18",
     "@types/express": "^5.0.2",
+    "@types/morgan": "^1.9.9",
     "typescript": "^5.8.3"
   },
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^5.1.0",
-    "mongoose": "^8.15.0"
+    "mongoose": "^8.15.0",
+    "morgan": "^1.10.0",
+    "nodemon": "^3.1.10"
   }
 }
